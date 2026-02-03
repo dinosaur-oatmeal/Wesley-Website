@@ -580,6 +580,7 @@ body {
 .glass-footer input::placeholder,
 .glass-footer textarea::placeholder {
     color: rgba(255, 255, 255, 0.55);
+    font-size: 1.10rem;
 }
 
 .submit-btn {
@@ -1281,9 +1282,9 @@ body {
 }
 
 /* =========================================================
-   UNIFIED RESPONSIVE (Under 1100px)
+   RESPONSIVE MEDIA
    ========================================================= */
-@media (max-width: 1100px) {
+@media (max-width: 1000px) {
     /* 1. Navigation - Mobile Row Layout */
     .glass-nav {
         flex-wrap: wrap;
