@@ -9,25 +9,25 @@
 
 :root {
     /* Brand */
-    --umc-red: #ff4b2b;
-    --umc-red-glow: rgba(255, 75, 43, 0.65);
+    --umc-red: #e4002b;
+    --umc-red-glow: #af292e;
     --accent-gold: #f39c12;
 
     /* Type */
-    --font-body: 'Montserrat', sans-serif;
+    --font-body: 'Oswald', sans-serif;
     --font-display: 'Fraunces', serif;
     --text-main: #ffffff;
     --text-dim: rgba(255, 255, 255, 0.7);
 
     /* Liquid Glass Core */
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-bg-strong: rgba(255, 255, 255, 0.12);
-    --glass-bg-subtle: rgba(255, 255, 255, 0.02);
-    --glass-highlight: rgba(255, 255, 255, 0.12);
+    --glass-bg: rgba(0, 0, 0, 0.05);
+    --glass-bg-strong: rgba(0, 0, 0, 0.12);
+    --glass-bg-subtle: rgba(0, 0, 0, 0.02);
+    --glass-highlight: rgba(87, 90, 93, 0.12);
 
-    --glass-border: rgba(255, 255, 255, 0.15);
-    --glass-border-strong: rgba(255, 255, 255, 0.3);
-    --glass-border-subtle: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(87, 90, 93, 0.15);
+    --glass-border-strong: rgba(181, 183, 180, 0.3);
+    --glass-border-subtle: rgba(0, 0, 0, 0.1);
 
     --glass-blur-weak: blur(15px);
     --glass-blur: blur(20px);
@@ -61,6 +61,8 @@ body {
     min-height: 100vh;
     color: var(--text-main);
     font-family: var(--font-body);
+    font-weight: 300;
+    font-size: 1.05rem;
     overflow-x: hidden;
 }
 
@@ -187,6 +189,7 @@ body {
    HERO + CORE TYPOGRAPHY
    ========================================================= */
 .hero {
+    margin-top: 5%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -225,8 +228,8 @@ body {
 }
 
 .mission-statement p {
-    font-size: 1.1rem;
-    font-weight: 400;
+    font-size: 1.25rem;
+    font-weight: 300;
     line-height: 1.6;
     color: var(--text-main);
 }
@@ -245,7 +248,7 @@ body {
 }
 
 .schedule {
-    font-size: 0.85rem;
+    font-size: 1.0rem;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: var(--text-main);
@@ -379,7 +382,7 @@ body {
 
 .belief-text p {
     font-family: var(--font-body);
-    font-size: 1.15rem;
+    font-size: 1.25rem;
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.85);
 }
@@ -413,7 +416,7 @@ body {
 .heritage-content p {
     max-width: 800px;
     margin: 0 auto;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     line-height: 1.7;
     color: var(--text-main);
 }
@@ -472,7 +475,7 @@ body {
 
 .contact-details p,
 .contact-details a {
-    font-size: 0.95rem;
+    font-size: 1.20rem;
     color: var(--text-main);
     line-height: 1.8;
     margin-bottom: 15px;
@@ -504,7 +507,7 @@ body {
 }
 
 .footer-socials i {
-    font-size: 1.1rem;
+    font-size: 2.0rem;
     color: var(--text-dim);
     transition: var(--transition-fast);
 }
@@ -550,6 +553,7 @@ body {
     grid-template-columns: 1fr 1fr;
     gap: 12px;
     margin-bottom: 12px;
+    font-size: 2.25rem;
 }
 
 .glass-footer input,
@@ -598,7 +602,7 @@ body {
 }
 
 .submit-btn-slick {
-    margin-top: 10px;
+    margin-top: 30px;
     width: 100%;
     padding: 9px 14px;
     border-radius: 30px;
@@ -660,6 +664,10 @@ body {
     margin: 0 auto 100px;
 }
 
+.intro-text {
+    font-size: 1.5rem;
+}
+
 .leader-pill {
     display: flex;
     align-items: center;
@@ -716,13 +724,13 @@ body {
 
 .leader-info h3 {
     font-family: var(--font-display);
-    font-size: 2.2rem;
+    font-size: 2.5rem;
     font-style: italic;
     margin-bottom: 5px;
 }
 
 .leader-info h3 small {
-    font-size: 1rem;
+    font-size: 1.5rem;
     font-weight: 300;
     font-family: var(--font-body);
     font-style: normal;
@@ -740,7 +748,7 @@ body {
 }
 
 .leader-info p {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     line-height: 1.7;
     color: var(--text-main);
     margin-bottom: 25px;
@@ -757,7 +765,7 @@ body {
 
 .leader-contact a {
     color: var(--text-main);
-    font-size: 1.3rem;
+    font-size: 1.75rem;
     opacity: 0.7;
     transition: var(--transition-fast);
 }
@@ -809,7 +817,7 @@ body {
 
 .faq-content {
     padding: 0 40px 30px;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     line-height: 1.7;
     color: var(--text-main);
 }
@@ -909,6 +917,7 @@ body {
     padding: 40px;
     text-align: center;
     transition: var(--transition-base);
+    font-size: 1.25rem;
 }
 
 .glass-card:hover {
@@ -1270,199 +1279,79 @@ body {
 }
 
 /* =========================================================
-   RESPONSIVE
+   UNIFIED RESPONSIVE (Under 1100px)
    ========================================================= */
 @media (max-width: 1100px) {
-    .impact-hero-slick {
-        flex-direction: column;
-        text-align: center;
-        padding: 60px 20px;
-    }
-    .impact-text-main { text-align: center; }
-    .impact-text-main h1 { font-size: 4.5rem; }
-    .giving-pill-container { width: 100%; justify-content: center; }
-    .giving-pill-cta { border-radius: 60px; padding: 40px; }
-}
-
-@media (max-width: 1000px) {
-    .footer-liquid-container { flex-direction: column; }
-    .footer-column { width: 100%; }
-    .input-stack { grid-template-columns: 1fr; }
-}
-
-@media (max-width: 975px) {
-    .glass-nav {
-        padding: 10px 2%;
-        gap: 8px;
-        flex-wrap: nowrap;
-        flex-direction: row;
-    }
-    .nav-links {
-        gap: 10px;
-        flex: 0 1 auto;
-        min-width: 0;
-    }
-    .nav-links a:not(.give-link) {
-        font-size: 0.6rem;
-        letter-spacing: 1px;
-    }
-    .give-link {
-        margin-left: 0;
-        padding: 6px 12px;
-        font-size: 0.6rem;
-        letter-spacing: 1px;
-    }
-    .nav-logo img { height: 44px; }
-    .nav-links.left { margin-right: 0; }
-    .nav-links.right { margin-left: 0; }
-}
-
-@media (min-width: 501px) and (max-width: 975px) {
-    .nav-links a:not(.give-link) {
-        font-size: 0.7rem;
-        letter-spacing: 1.2px;
-    }
-    .give-link {
-        padding: 7px 14px;
-        font-size: 0.7rem;
-    }
-    .nav-logo img { height: 48px; }
-}
-
-@media (max-width: 900px) {
-    .glass-nav { top: 10px; }
-    .jazzy-title { font-size: 3rem; }
-    .liquid-container { flex-direction: column; align-items: center; }
-    .slick-row-container { flex-direction: column; padding: 0 18px; }
-    .slick-pill-row { width: 100%; padding: 32px; border-radius: 26px; }
-    .pill-btn-content .jazzy-title { font-size: 2rem; }
-    .pill-btn-content p { font-size: 0.95rem; }
-    .giving-pill-cta { padding: 32px 28px; border-radius: 50px; }
-    .impact-flow-slick,
-    .beliefs-flow,
-    .leadership-flow {
-        padding: 0 18px;
-    }
-    .wide-glass-box {
-        width: 100%;
-        max-width: 720px;
-        margin: 0 auto 32px;
-        padding: 40px 28px;
-    }
-    .map-container,
-    .map-glass {
-        max-width: 860px;
-        margin: 24px auto;
-        border-radius: 40px;
-    }
-    .google-map-iframe { border-radius: 28px; }
-    .slick-pill,
-    .slick-pill.reverse,
-    .belief-pill,
-    .belief-pill.reverse,
-    .leader-pill,
-    .leader-pill.reverse {
-        margin-left: 0;
-        margin-right: 0;
-        width: 100%;
-    }
-}
-
-@media (max-width: 850px) {
-    .belief-pill,
-    .belief-pill.reverse {
-        flex-direction: column;
-        text-align: center;
-        border-radius: 50px;
-        padding: 40px 30px;
-        gap: 20px;
-    }
-    .belief-icon { flex: none; font-size: 3rem; }
-}
-
-@media (max-width: 800px) {
-    .leader-pill,
-    .leader-pill.reverse {
-        flex-direction: column;
-        border-radius: 50px;
-        text-align: center;
-        padding: 40px;
-    }
-    .leader-pill.reverse .leader-contact { justify-content: center; }
-    .leader-photo {
-        flex: none;
-        width: 190px;
-        height: 190px;
-    }
-}
-
-@media (max-width: 900px) {
-    .slick-pill,
-    .slick-pill.reverse {
-        flex-direction: column;
-        margin: 0 !important;
-        padding: 32px;
-        border-radius: 38px;
-        text-align: center;
-    }
-    .pill-text h3 { font-size: 2.4rem; }
-    .pill-text p { font-size: 1.05rem; }
-    .pill-icon { flex: none; margin-bottom: 20px; }
-}
-
-@media (max-width: 480px) {
+    /* 1. Navigation - Mobile Row Layout */
     .glass-nav {
         flex-wrap: wrap;
         justify-content: center;
-        row-gap: 4px;
-        padding: 6px 2%;
+        gap: 8px;
+        padding: 10px 2%;
     }
-    .nav-links { display: contents; }
-    .nav-logo { flex: 0 0 auto; }
-    .nav-logo img { height: 36px; }
+    .nav-links { 
+        display: contents; /* Allows children to flow in the nav grid */
+    }
+    .nav-logo img { height: 38px; }
     .nav-links a:not(.give-link) {
-        font-size: 0.58rem;
-        letter-spacing: 0.9px;
+        font-size: 0.65rem;
+        letter-spacing: 1px;
     }
     .give-link {
-        flex: 0 0 100%;
+        flex: 0 0 100%; /* Forces the button to its own row */
         text-align: center;
-        margin: 4px auto 0;
-        padding: 5px 10px;
-        font-size: 0.58rem;
-        letter-spacing: 0.9px;
+        margin: 5px auto 0;
+        padding: 8px 15px;
+        font-size: 0.65rem;
     }
 
-    .beliefs-flow { padding: 0 12px; }
-    .wide-glass-box {
+    /* 2. Global Stacked Layouts */
+    .impact-hero-slick,
+    .footer-liquid-container,
+    .liquid-container,
+    .slick-row-container,
+    .slick-pill,
+    .belief-pill,
+    .belief-pill.reverse,
+    .leader-pill {
+        flex-direction: column !important;
+        text-align: center;
+        width: 100%;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    /* 3. Hero & Text Adjustments */
+    .impact-text-main h1, 
+    .jazzy-title { font-size: 3rem; }
+    .impact-text-main { padding: 40px 20px; }
+    
+    /* 4. Pills & Boxes */
+    .wide-glass-box,
+    .slick-pill-row,
+    .giving-pill-cta {
+        width: 100%;
         max-width: 100%;
-        margin: 0 auto 24px;
-        padding: 28px 20px;
+        padding: 30px 20px;
         border-radius: 40px;
     }
-
-    .faq-accordion { padding: 0 12px; }
-    .glass-detail { border-radius: 28px; }
-    .glass-detail summary {
-        padding: 18px 22px;
-        font-size: 1.2rem;
+    .pill-icon, .belief-icon, .leader-photo {
+        margin: 0 auto 20px;
+        flex: none;
     }
-    .faq-content { padding: 0 22px 22px; }
+    .leader-photo { width: 180px; height: 180px; }
 
-    .map-container,
-    .map-glass {
+    /* 5. Footer & Forms */
+    .footer-column { width: 100%; }
+    .input-stack { grid-template-columns: 1fr; }
+
+    /* 6. Map & Accordion */
+    .map-container, .map-glass, .google-map-iframe {
+        border-radius: 24px;
         max-width: 100%;
-        margin: 16px auto;
-        border-radius: 30px;
     }
-    .google-map-iframe { border-radius: 20px; }
-}
-
-@media (min-width: 1200px) {
-    .hero .jazzy-title { font-size: 5rem; }
-    .mission-statement p { font-size: 1.2rem; }
-    .schedule { font-size: 0.95rem; }
-    .slick-pill-row { border-radius: 30px; }
-    .pill-btn-content .jazzy-title { font-size: 2.4rem; }
-    .pill-btn-content p { font-size: 1.05rem; }
+    .glass-detail summary {
+        padding: 15px;
+        font-size: 1.1rem;
+    }
 }
