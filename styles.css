@@ -1,3 +1,6 @@
+/* =========================================================
+   RESET + ROOT
+   ========================================================= */
 * {
     margin: 0;
     padding: 0;
@@ -5,25 +8,59 @@
 }
 
 :root {
+    /* Brand */
     --umc-red: #ff4b2b;
-    --glass-bg: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.15);
-    --text-main: #ffffff;
+    --umc-red-glow: rgba(255, 75, 43, 0.65);
     --accent-gold: #f39c12;
+
+    /* Type */
+    --font-body: 'Montserrat', sans-serif;
+    --font-display: 'Fraunces', serif;
+    --text-main: #ffffff;
     --text-dim: rgba(255, 255, 255, 0.7);
-    --liquid-shadow: 0 20px 50px rgba(0,0,0,0.4);
-    --glass-blur: blur(22px);
+
+    /* Liquid Glass Core */
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-bg-strong: rgba(255, 255, 255, 0.12);
+    --glass-bg-subtle: rgba(255, 255, 255, 0.02);
     --glass-highlight: rgba(255, 255, 255, 0.12);
+
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --glass-border-strong: rgba(255, 255, 255, 0.3);
+    --glass-border-subtle: rgba(255, 255, 255, 0.1);
+
+    --glass-blur-weak: blur(15px);
+    --glass-blur: blur(20px);
+    --glass-blur-strong: blur(25px);
+    --glass-blur-max: blur(30px);
+
+    --shadow-glass: 0 20px 50px rgba(0, 0, 0, 0.4);
+    --shadow-glass-strong: 0 30px 60px rgba(0, 0, 0, 0.5);
+    --shadow-glass-max: 0 40px 100px rgba(0, 0, 0, 0.7);
+    --shadow-inset: inset 0 0 20px var(--glass-bg);
+
+    /* Motion */
     --ease-slick: cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fast: 0.3s ease;
+    --transition-base: 0.4s ease;
+    --transition-slick: 0.4s var(--ease-slick);
+    --transition-slow: 0.6s var(--ease-slick);
+
+    /* Layout */
+    --page-max: 1200px;
+    --page-gutter: clamp(20px, 4vw, 70px);
 }
 
+/* =========================================================
+   BASE
+   ========================================================= */
 body {
     background: url('images/Worship.png') no-repeat center center fixed;
     background-size: cover;
     background-color: #000;
     min-height: 100vh;
-    color: white;
-    font-family: 'Montserrat', sans-serif;
+    color: var(--text-main);
+    font-family: var(--font-body);
     overflow-x: hidden;
 }
 
@@ -33,55 +70,56 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+    background: radial-gradient(
+        circle at center,
+        rgba(0, 0, 0, 0.3) 0%,
+        rgba(0, 0, 0, 0.8) 100%
+    );
     z-index: -1;
 }
 
-/* Symmetrical Fixed Navbar */
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
 .glass-nav {
     position: fixed;
-    top: 0; /* Align to top for a full bar feel */
+    top: 0;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     align-items: center;
     z-index: 100;
-    width: 100%; /* Spans full width when glass is active */
+    width: 100%;
     padding: 20px 5%;
-    justify-content: space-between; 
-    
-    /* The Liquid Glass Background */
+    justify-content: space-between;
     background: var(--glass-bg);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    
-    /* Smooth transitions for both movement and the glass effect */
-    transition: 
-        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-        background 0.4s ease, 
-        backdrop-filter 0.4s ease, 
-        border-color 0.4s ease,
-        opacity 0.4s ease;
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--glass-border-subtle);
+    transition:
+        transform 0.5s var(--ease-slick),
+        background var(--transition-base),
+        backdrop-filter var(--transition-base),
+        border-color var(--transition-base),
+        opacity var(--transition-base);
 }
 
-/* State: Transparent at the top of the page */
 .glass-nav.at-top {
     background: var(--glass-bg);
     backdrop-filter: blur(0px);
     -webkit-backdrop-filter: blur(0px);
     border-color: var(--glass-highlight);
-    padding-top: 30px; /* Give it a little breathing room when transparent */
+    padding-top: 30px;
 }
 
 .nav-hidden {
-    transform: translate(-50%, -150%); /* Slides it up and out of view */
+    transform: translate(-50%, -150%);
     opacity: 0;
-    pointer-events: none; /* Prevents clicking invisible links */
+    pointer-events: none;
 }
 
 .nav-links {
-    flex: 1; 
+    flex: 1;
     display: flex;
     gap: 30px;
     align-items: center;
@@ -92,22 +130,20 @@ body {
 .nav-links.right { justify-content: flex-start; margin-left: 40px; }
 
 .nav-logo {
-    /* Logo stays its natural size and doesn't shrink/grow */
-    flex: 0 0 auto; 
+    flex: 0 0 auto;
     text-align: center;
 }
 
 .nav-logo img {
     height: 65px;
     display: block;
-    transition: transform 0.4s ease;
+    transition: transform var(--transition-base);
 }
 
 .nav-logo img:hover {
     transform: scale(1.05);
 }
 
-/* Jazzy Typography for Links */
 .nav-links a:not(.give-link) {
     color: var(--text-main);
     text-decoration: none;
@@ -115,18 +151,17 @@ body {
     letter-spacing: 2px;
     font-size: 0.75rem;
     font-weight: 700;
-    transition: all 0.3s var(--ease-slick);
+    transition: all var(--transition-fast) var(--ease-slick);
 }
 
 .nav-links a:not(.give-link):hover {
-    color: var(--umc-red); /* Sunset Red on hover */
-    text-shadow: 0 0 15px var(--umc-red-glow); /* Jazzy glow */
+    color: var(--umc-red);
+    text-shadow: 0 0 15px var(--umc-red-glow);
 }
 
-/* Refined Support Button */
 .give-link {
-    margin-left: auto; 
-    background: var(--umc-red) !important; /* Primary Red */
+    margin-left: auto;
+    background: var(--umc-red) !important;
     color: var(--text-main) !important;
     border: 1px solid var(--umc-red);
     padding: 10px 22px;
@@ -137,42 +172,36 @@ body {
     letter-spacing: 2px;
     font-size: 0.75rem;
     font-weight: 700;
-    transition: all 0.4s var(--ease-slick);
+    transition: all var(--transition-slick);
 }
 
 .give-link:hover {
-    background: var(--text-main) !important; /* Turns White */
-    color: var(--umc-red) !important; /* Text turns Red */
+    background: var(--text-main) !important;
+    color: var(--umc-red) !important;
     border-color: var(--text-main);
     box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
-    transform: scale(1.05); /* Extra "slick" feedback */
+    transform: scale(1.05);
 }
 
-.mission-statement a {
-    color: var(--text-main); /* Uses the #ffffff variable */
-    font-weight: 700;        /* Makes it bold */
-    text-decoration: underline; 
-    text-underline-offset: 4px; /* Adds breathing room under the text */
-    transition: all 0.3s ease;
-}
-
-.mission-statement a:hover {
-    color: var(--umc-red);
-    text-decoration-color: var(--umc-red);
-}
-
-/* Hero Typography */
+/* =========================================================
+   HERO + CORE TYPOGRAPHY
+   ========================================================= */
 .hero {
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    min-height: 100vh;
-    padding: 120px 20px 40px;
+    padding: 120px var(--page-gutter) 40px;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: var(--page-max);
+    margin: 0 auto;
 }
 
 .jazzy-title {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-display);
     font-size: 4.5rem;
     font-weight: 600;
     font-style: italic;
@@ -182,13 +211,12 @@ body {
     letter-spacing: -2px;
 }
 
-/* Fix: Ensures icons inside jazzy titles stay on the same line */
 .jazzy-title i.icon-large {
-    display: inline-block; /* Overrides display: block from styles.css */
-    margin-bottom: 0;      /* Removes the 20px bottom margin */
-    margin-right: 15px;    /* Adds breathing room between icon and text */
-    vertical-align: middle; /* Centers the icon vertically with the text */
-    font-size: 0.8em;      /* Scales slightly to match the font height */
+    display: inline-block;
+    margin-bottom: 0;
+    margin-right: 15px;
+    vertical-align: middle;
+    font-size: 0.8em;
 }
 
 .mission-statement {
@@ -203,6 +231,19 @@ body {
     color: var(--text-main);
 }
 
+.mission-statement a {
+    color: var(--text-main);
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: all var(--transition-fast);
+}
+
+.mission-statement a:hover {
+    color: var(--umc-red);
+    text-decoration-color: var(--umc-red);
+}
+
 .schedule {
     font-size: 0.85rem;
     letter-spacing: 4px;
@@ -211,7 +252,9 @@ body {
     margin-bottom: 50px;
 }
 
-/* Refined Liquid Boxes */
+/* =========================================================
+   LIQUID BUTTONS
+   ========================================================= */
 .liquid-container {
     display: flex;
     gap: 40px;
@@ -222,36 +265,40 @@ body {
     width: 220px;
     height: 220px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--umc-red);
+    color: var(--text-main);
+    backdrop-filter: var(--glass-blur-weak);
+    -webkit-backdrop-filter: var(--glass-blur-weak);
+    border: 1px solid var(--glass-border);
     display: flex;
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    color: white;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     font-size: 0.9rem;
     line-height: 1.3;
-    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-    box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
+    transition: all var(--transition-slow);
+    box-shadow: var(--shadow-inset);
 }
 
 .liquid-box:hover {
     transform: scale(1.1) translateY(-10px);
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    background: var(--glass-bg-strong);
+    border-color: var(--glass-highlight);
+    box-shadow: var(--shadow-glass);
+    background: var(--text-main);
+    color: var(--umc-red);
 }
 
 .liquid-box.highlight {
-    background: rgba(255, 255, 255, 0.08); /* Slightly brighter but not pushy */
+    background: var(--glass-highlight);
 }
 
-/* Watermark */
+/* =========================================================
+   WATERMARK
+   ========================================================= */
 .watermark {
     position: fixed;
     bottom: 5%;
@@ -262,7 +309,9 @@ body {
     pointer-events: none;
 }
 
-/* Subpage specific spacing */
+/* =========================================================
+   SUBPAGE WRAPPERS
+   ========================================================= */
 .subpage .content-wrapper {
     padding-top: 150px;
     max-width: 1100px;
@@ -275,7 +324,9 @@ body {
     margin-bottom: 80px;
 }
 
-/* Beliefs Flow - The "Jazzy" Staggered Layout */
+/* =========================================================
+   BELIEFS
+   ========================================================= */
 .beliefs-flow {
     max-width: 950px;
     margin: 0 auto 100px;
@@ -287,38 +338,38 @@ body {
     gap: 50px;
     margin-bottom: 40px;
     padding: 50px 60px;
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 120px; /* The liquid drop/pill shape */
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur-weak);
+    -webkit-backdrop-filter: var(--glass-blur-weak);
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: 120px;
+    transition: all 0.5s var(--ease-slick);
 }
 
 .belief-pill.reverse {
     flex-direction: row-reverse;
     text-align: right;
-    background: rgba(255, 255, 255, 0.02); /* Slight variation */
+    background: var(--glass-bg-subtle);
 }
 
 .belief-pill:hover {
     transform: scale(1.02) translateY(-5px);
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    background: var(--glass-highlight);
+    border-color: var(--glass-border-strong);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 .belief-icon {
     font-size: 3.5rem;
-    color: #8470FF; /* UMC Red Pop */
+    color: var(--umc-red);
     flex: 0 0 120px;
     display: flex;
     justify-content: center;
-    filter: drop-shadow(0 0 15px rgba(255,75,43,0.3));
+    filter: drop-shadow(0 0 15px rgba(255, 75, 43, 0.3));
 }
 
 .belief-text h3 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-display);
     font-style: italic;
     font-size: 2.4rem;
     margin-bottom: 12px;
@@ -327,32 +378,19 @@ body {
 }
 
 .belief-text p {
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-size: 1.15rem;
     line-height: 1.8;
     color: rgba(255, 255, 255, 0.85);
 }
 
-/* Mobile Smoothing */
-@media (max-width: 850px) {
-    .belief-pill, .belief-pill.reverse {
-        flex-direction: column;
-        text-align: center;
-        border-radius: 50px;
-        padding: 40px 30px;
-        gap: 20px;
-    }
-    .belief-icon {
-        flex: none;
-        font-size: 3rem;
-    }
-}
-
-/* Specific styling for Heritage/Inclusion sections */
+/* =========================================================
+   HERITAGE / INCLUSION
+   ========================================================= */
 .wide-glass-box {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border-subtle);
     border-radius: 60px;
     padding: 60px 40px;
     margin-bottom: 40px;
@@ -360,14 +398,14 @@ body {
 }
 
 .wide-glass-box.highlight {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+    background: var(--glass-bg-strong);
+    border-color: var(--glass-border-strong);
+    box-shadow: 0 0 30px var(--glass-bg);
 }
 
 .icon-large {
     font-size: 3rem;
-    color: #ff4b2b; /* A jazzy pop of color */
+    color: var(--umc-red);
     margin-bottom: 20px;
     display: block;
 }
@@ -377,26 +415,23 @@ body {
     margin: 0 auto;
     font-size: 1.1rem;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.9);
+    color: var(--text-main);
 }
 
-/* Newsletter Refinement */
+/* =========================================================
+   NEWSLETTER
+   ========================================================= */
 .newsletter-glass {
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border-subtle);
     border-radius: 40px;
     padding: 40px;
     margin-top: 60px;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-    .glass-nav { flex-direction: column; gap: 15px; top: 10px; }
-    .jazzy-title { font-size: 3rem; }
-    .liquid-container { flex-direction: column; align-items: center; }
-}
-
-/* Glass Footer Styles */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 .glass-footer {
     padding: 90px 5% 50px;
     position: relative;
@@ -408,7 +443,7 @@ body {
     margin: 0 auto;
     display: flex;
     gap: 30px;
-    align-items: stretch; /* Ensures all glass panes are the same height */
+    align-items: stretch;
 }
 
 .footer-column {
@@ -421,8 +456,8 @@ body {
     padding: 40px;
     text-align: left;
     color: var(--text-main);
-    box-shadow: var(--liquid-shadow);
-    transition: transform 0.4s var(--ease-slick), background 0.4s ease, border-color 0.4s ease;
+    box-shadow: var(--shadow-glass);
+    transition: transform var(--transition-slick), background var(--transition-base), border-color var(--transition-base);
 }
 
 .footer-column:hover {
@@ -430,20 +465,23 @@ body {
     background: var(--glass-highlight);
 }
 
-/* Typography Inside Footer */
 .footer-column h3.jazzy-title {
     font-size: 1.8rem;
     margin-bottom: 25px;
 }
 
-/* Column 1: Contact Details */
-.contact-details p, .contact-details a {
+.contact-details p,
+.contact-details a {
     font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.78);
+    color: var(--text-main);
     line-height: 1.8;
     margin-bottom: 15px;
     display: block;
     text-decoration: none;
+}
+
+.contact-details i {
+    color: var(--umc-red);
 }
 
 .footer-socials {
@@ -460,20 +498,19 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: var(--glass-bg);
     text-decoration: none;
-    transition: 0.3s;
+    transition: var(--transition-fast);
 }
 
 .footer-socials i {
     font-size: 1.1rem;
     color: var(--text-dim);
-    transition: 0.3s;
+    transition: var(--transition-fast);
 }
 
 .footer-socials a:hover {
-    background: rgba(255, 255, 255, 0.16);
+    background: var(--glass-bg);
     border-color: rgba(255, 255, 255, 0.45);
     transform: translateY(-2px);
 }
@@ -482,32 +519,30 @@ body {
     color: var(--umc-red);
 }
 
-/* Column 2: Mailing Form Fixes */
 .mailto-link {
-    color: white;
+    color: var(--text-main);
     text-decoration: none;
     font-weight: 700;
     font-size: 1.1rem;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    transition: 0.3s;
+    transition: var(--transition-fast);
 }
 
 .mailto-link:hover {
-    color: #ff4b2b;
+    color: var(--umc-red);
     transform: translateX(5px);
 }
 
-/* The Liquid Glass Form Container */
 .contact-glass {
-    background: rgba(255, 255, 255, 0.07);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur-strong);
+    -webkit-backdrop-filter: var(--glass-blur-strong);
     border: 1px solid rgba(255, 255, 255, 0.2);
     padding: 40px;
-    border-radius: 60px; /* High radius for that liquid feel */
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    border-radius: 60px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
 }
 
 .input-stack {
@@ -520,14 +555,14 @@ body {
 .glass-footer input,
 .glass-footer textarea {
     width: 100%;
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border-subtle);
     border-radius: 20px;
     padding: 12px 16px;
-    color: white;
-    font-family: 'Montserrat', sans-serif;
+    color: var(--text-main);
+    font-family: var(--font-body);
     outline: none;
-    transition: 0.3s;
+    transition: var(--transition-fast);
 }
 
 .glass-footer input:focus,
@@ -561,28 +596,28 @@ body {
     color: white;
     transform: scale(1.02);
 }
+
 .submit-btn-slick {
     margin-top: 10px;
     width: 100%;
     padding: 9px 14px;
     border-radius: 30px;
     border: none;
-    background: white;
-    color: black;
+    background: var(--umc-red);
+    color: var(--text-main);
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
     cursor: pointer;
-    transition: 0.4s;
+    transition: var(--transition-base);
     font-size: 0.8rem;
 }
 
 .submit-btn-slick:hover {
-    background: var(--umc-red);
-    color: white;
+    background: var(--text-main);
+    color: var(--umc-red);
 }
 
-/* Column 3: Partner Section */
 .partner-link {
     display: flex;
     flex-direction: column;
@@ -601,7 +636,7 @@ body {
     max-width: 100%;
     height: auto;
     opacity: 0.9;
-    transition: 0.4s;
+    transition: var(--transition-base);
 }
 
 .partner-link:hover img {
@@ -609,7 +644,6 @@ body {
     transform: scale(1.05);
 }
 
-/* Bottom Copyright */
 .footer-bottom-slick {
     margin-top: 60px;
     text-align: center;
@@ -618,20 +652,9 @@ body {
     letter-spacing: 2px;
 }
 
-/* Mobile Smoothing */
-@media (max-width: 1000px) {
-    .footer-liquid-container {
-        flex-direction: column;
-    }
-    .footer-column {
-        width: 100%;
-    }
-    .input-stack {
-        grid-template-columns: 1fr;
-    }
-}
-
-/* Leadership Specifics */
+/* =========================================================
+   LEADERSHIP
+   ========================================================= */
 .leadership-flow {
     max-width: 900px;
     margin: 0 auto 100px;
@@ -643,10 +666,10 @@ body {
     gap: 40px;
     margin-bottom: 40px;
     padding: 60px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
     border-radius: 100px;
     transition: all 0.5s ease;
 }
@@ -657,12 +680,12 @@ body {
 }
 
 .leader-pill:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg);
     transform: translateY(-5px);
 }
 
 .leader-info h3 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-display);
     font-size: 2.2rem;
     font-style: italic;
     margin-bottom: 5px;
@@ -671,7 +694,7 @@ body {
 .leader-info h3 small {
     font-size: 1rem;
     font-weight: 300;
-    font-family: 'Montserrat', sans-serif;
+    font-family: var(--font-body);
     font-style: normal;
     opacity: 0.6;
 }
@@ -682,14 +705,14 @@ body {
     letter-spacing: 3px;
     font-size: 0.8rem;
     font-weight: 700;
-    color: #ff4b2b; /* UMC Red Accent */
+    color: var(--umc-red);
     margin-bottom: 20px;
 }
 
 .leader-info p {
     font-size: 1.1rem;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-main);
     margin-bottom: 25px;
 }
 
@@ -703,48 +726,39 @@ body {
 }
 
 .leader-contact a {
-    color: white;
+    color: var(--text-main);
     font-size: 1.3rem;
     opacity: 0.7;
-    transition: 0.3s;
+    transition: var(--transition-fast);
 }
 
 .leader-contact a:hover {
     opacity: 1;
-    color: #ff4b2b;
+    color: var(--umc-red);
     transform: scale(1.2);
 }
 
-/* Mobile Smoothing */
-@media (max-width: 800px) {
-    .leader-pill, .leader-pill.reverse {
-        flex-direction: column;
-        border-radius: 50px;
-        text-align: center;
-        padding: 40px;
-    }
-    .leader-pill.reverse .leader-contact { justify-content: center; }
-}
-
-/* FAQ Accordion Styling */
+/* =========================================================
+   FAQ
+   ========================================================= */
 .faq-accordion {
     max-width: 800px;
     margin: 0 auto 100px;
 }
 
 .glass-detail {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur-weak);
+    border: 1px solid var(--glass-border-subtle);
     border-radius: 40px;
     margin-bottom: 20px;
     overflow: hidden;
-    transition: 0.3s ease;
+    transition: var(--transition-fast);
 }
 
 .glass-detail summary {
     padding: 25px 40px;
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-display);
     font-style: italic;
     font-size: 1.5rem;
     list-style: none;
@@ -756,7 +770,7 @@ body {
 
 .glass-detail summary i {
     font-size: 1rem;
-    transition: 0.4s;
+    transition: var(--transition-base);
 }
 
 .glass-detail[open] summary i {
@@ -767,56 +781,51 @@ body {
     padding: 0 40px 30px;
     font-size: 1.1rem;
     line-height: 1.7;
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--text-main);
 }
 
-/* Find Us Section */
+/* =========================================================
+   FIND US
+   ========================================================= */
 .find-us {
     text-align: center;
-    padding-bottom: 100px;
 }
 
 .map-container {
     max-width: 1000px;
     margin: 20px auto;
-    border-radius: 60px; /* Large liquid corners */
+    border-radius: 60px;
     overflow: hidden;
     position: relative;
 }
 
 .map-container iframe {
-    filter: grayscale(0.5) contrast(1.2); /* Makes map match the jazzy vibe */
+    filter: grayscale(0.5) contrast(1.2);
 }
 
-/* Mirroring the Calendar format for the Map */
 .map-glass {
     max-width: 1000px;
     margin: 40px auto;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
     border-radius: 60px;
-    
-    /* THE FLOATING EFFECT: 30px padding around the map and info */
-    padding: 30px; 
-    
+    padding: 15px;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Space between the map and the address info */
+    gap: 20px;
 }
 
 .google-map-iframe {
     width: 100%;
-    border-radius: 35px; /* Matching the calendar's inner corners */
+    border-radius: 35px;
     border: none;
-    
-    /* Jazzy Filter: Matches the calendar's dark-mode look */
     filter: invert(90%) hue-rotate(180deg) brightness(1.1) contrast(0.9);
     opacity: 0.85;
-    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: 0.4s var(--ease-slick);
 }
 
 .google-map-iframe:hover {
@@ -825,36 +834,36 @@ body {
     transform: scale(1.01);
 }
 
-/* Adjusting map-info to fit inside the new glass padding */
 .map-info {
-    padding: 10px 0 0; /* Reduced padding since container handles it */
-    background: transparent; /* Remove old background to let the glass show through */
+    padding: 10px 0 0;
+    background: transparent;
     backdrop-filter: none;
     display: flex;
     justify-content: center;
     gap: 40px;
     font-weight: 700;
     letter-spacing: 1px;
-    color: var(--umc-red)
+    color: var(--umc-red);
 }
 
-/* Connect Hero Styling */
+/* =========================================================
+   CONNECT
+   ========================================================= */
 .connect-hero {
     text-align: center;
     margin-bottom: 60px;
 }
 
 .scripture-quote {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-display);
     font-style: italic;
     font-size: 1.4rem;
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-main);
     max-width: 800px;
     margin: 20px auto;
     line-height: 1.6;
 }
 
-/* Connect Grid */
 .connect-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -863,29 +872,34 @@ body {
 }
 
 .glass-card {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur-weak);
+    border: 1px solid var(--glass-border-subtle);
     border-radius: 40px;
     padding: 40px;
     text-align: center;
-    transition: 0.4s ease;
+    transition: var(--transition-base);
 }
 
 .glass-card:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--glass-bg);
     transform: translateY(-10px);
 }
 
 .glass-card h3 {
-    font-family: 'Fraunces', serif;
+    font-family: var(--font-display);
     font-style: italic;
     font-size: 1.8rem;
     margin: 20px 0 15px;
+    color: var(--accent-gold)
+}
+
+.glass-card .icon {
+    color: var(--umc-red);
 }
 
 .text-link {
-    color: #ff4b2b;
+    color: var(--umc-red);
     text-decoration: none;
     font-weight: 700;
     font-size: 0.9rem;
@@ -893,7 +907,9 @@ body {
     margin-top: 20px;
 }
 
-/* Special Events Section */
+/* =========================================================
+   SPECIAL EVENTS
+   ========================================================= */
 .special-events {
     text-align: center;
     padding: 60px 0;
@@ -908,70 +924,65 @@ body {
 
 .social-links-large i {
     font-size: 2.5rem;
-    color: white;
+    color: var(--text-main);
     opacity: 0.6;
-    transition: 0.3s;
+    transition: var(--transition-fast);
 }
 
 .social-links-large i:hover {
     opacity: 1;
-    color: #ff4b2b;
+    color: var(--umc-red);
     transform: scale(1.1);
 }
 
-/* Image Carousel Container */
+/* =========================================================
+   CAROUSEL
+   ========================================================= */
 .image-carousel {
     width: 100%;
     overflow: hidden;
     padding: 60px 0;
     position: relative;
-    /* Optional: Fades on the edges to make it feel more "liquid" */
     mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
     -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .carousel-track {
     display: flex;
-    /* 14 slides total (7 unique * 2) at 350px each */
-    width: calc(350px * 14); 
-    animation: scroll 35s linear infinite; /* Slightly faster for 7 images */
+    width: calc(350px * 14);
+    animation: scroll 35s linear infinite;
 }
 
 .slide {
     width: 350px;
     height: 250px;
-    padding: 0 15px; /* Adds space between the "bubbles" */
+    padding: 0 15px;
     flex-shrink: 0;
 }
 
 .slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* This is the secret for different frame sizes */
-    border-radius: 40px; /* Liquid rounded corners */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    object-fit: cover;
+    border-radius: 40px;
+    border: 1px solid var(--glass-bg);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
     transition: transform 0.5s ease;
 }
 
-/* Subtle hover effect for individual community moments */
 .slide img:hover {
     transform: scale(1.05);
-    border-color: rgba(255, 255, 255, 0.3);
+    border-color: var(--glass-border-strong);
 }
 
-/* We move the track exactly the width of the first 8 images (-2800px) */
 @keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        /* Move exactly 7 images to the left, then snap back */
-        transform: translateX(calc(-350px * 7)); 
-    }
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-350px * 7)); }
 }
 
-/* Calendar Styling */
+/* =========================================================
+   CALENDAR
+   ========================================================= */
 .calendar-section {
     text-align: center;
     margin-top: 80px;
@@ -980,18 +991,15 @@ body {
 .calendar-glass {
     max-width: 1000px;
     margin: 40px auto;
-    height: 700px; /* Increased slightly to account for padding */
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    height: 700px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
     border-radius: 60px;
-    
-    /* THE FIX: Added padding for the floating effect */
-    padding: 30px; 
-    
+    padding: 15px;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
 }
@@ -999,32 +1007,29 @@ body {
 .google-calendar-iframe {
     width: 100%;
     height: 100%;
-    
-    /* Added border-radius so the inner corners are also "liquid" */
-    border-radius: 35px; 
+    border-radius: 35px;
     border: none;
-    
-    /* Jazzy filter for dark mode */
     filter: invert(90%) hue-rotate(180deg) brightness(1.1) contrast(0.9);
     opacity: 0.85;
-    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: 0.4s var(--ease-slick);
 }
 
 .google-calendar-iframe:hover {
     opacity: 1;
     filter: invert(90%) hue-rotate(180deg) brightness(1.2);
-    /* Subtle lift effect on hover */
-    transform: scale(1.01); 
+    transform: scale(1.01);
 }
 
-/* Slick Impact Layout - Pill Hero */
+/* =========================================================
+   IMPACT
+   ========================================================= */
 .impact-hero-slick {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 40px;
-    padding: 100px 0;
-    margin-bottom: 80px;
+    padding: 30px 0;
+    margin-bottom: 40px;
 }
 
 .impact-text-main {
@@ -1033,7 +1038,7 @@ body {
 }
 
 .impact-text-main h1 {
-    font-size: 6.5rem; /* Massive for visual weight */
+    font-size: 6.5rem;
     line-height: 0.85;
     margin-bottom: 30px;
 }
@@ -1041,11 +1046,10 @@ body {
 .impact-text-main p {
     font-size: 1.25rem;
     max-width: 550px;
-    color: rgba(255,255,255,0.85);
+    color: rgba(255, 255, 255, 0.85);
     line-height: 1.8;
 }
 
-/* The New Giving Pill CTA */
 .giving-pill-container {
     flex: 1;
     display: flex;
@@ -1055,26 +1059,26 @@ body {
 .giving-pill-cta {
     width: 100%;
     max-width: 500px;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(30px);
-    -webkit-backdrop-filter: blur(30px);
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur-max);
+    -webkit-backdrop-filter: var(--glass-blur-max);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 150px; /* Matching the liquid pill language */
+    border-radius: 150px;
     padding: 60px 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     text-decoration: none;
-    color: white;
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+    color: var(--text-main);
+    transition: all var(--transition-slow);
+    box-shadow: var(--shadow-glass-strong);
 }
 
 .giving-pill-cta:hover {
     transform: scale(1.03) translateX(-10px);
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+    box-shadow: var(--shadow-glass-max);
 }
 
 .pill-content {
@@ -1092,13 +1096,13 @@ body {
     font-size: 0.85rem;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.6);
+    color: var(--text-main);
 }
 
 .giving-pill-cta i {
     font-size: 2.5rem;
     opacity: 0.3;
-    transition: 0.4s ease;
+    transition: var(--transition-base);
 }
 
 .giving-pill-cta:hover i {
@@ -1106,7 +1110,138 @@ body {
     transform: translateX(15px);
 }
 
-/* Mobile Smoothing */
+.slick-row-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 50px auto 0;
+}
+
+.slick-pill-row {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 40px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur-strong);
+    -webkit-backdrop-filter: var(--glass-blur-strong);
+    border: 1px solid var(--glass-border);
+    border-radius: 32px;
+    text-decoration: none;
+    color: var(--text-main);
+    transition: all 0.5s var(--ease-slick);
+    box-shadow: var(--shadow-glass);
+}
+
+.slick-pill-row.highlight {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--glass-border-strong);
+}
+
+.slick-pill-row:hover {
+    transform: scale(1.03) translateY(-10px);
+    background: var(--glass-bg-strong);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.6);
+}
+
+.pill-btn-content {
+    text-align: left;
+}
+
+.pill-btn-content .jazzy-title {
+    font-size: 2.3rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.pill-btn-content p {
+    font-size: 1.02rem;
+    color: var(--text-main);
+    line-height: 1.4;
+    max-width: 250px;
+}
+
+.slick-pill-row i {
+    font-size: 1.8rem;
+    opacity: 0.2;
+    transition: var(--transition-base);
+}
+
+.slick-pill-row:hover i {
+    opacity: 1;
+    transform: translateX(15px);
+}
+
+.impact-flow-slick {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-bottom: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.slick-pill {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    padding: 60px 80px;
+    border-radius: 70px;
+    border: 1px solid var(--glass-border-subtle);
+    transition: all var(--transition-slow);
+}
+
+.slick-pill:not(.reverse) {
+    margin-right: 10%;
+}
+
+.slick-pill.reverse {
+    flex-direction: row-reverse;
+    text-align: right;
+    margin-left: 10%;
+    background: var(--glass-bg-subtle);
+}
+
+.slick-pill:hover {
+    transform: scale(1.02) translateY(-10px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--glass-border-strong);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.pill-icon {
+    font-size: 4rem;
+    color: var(--umc-red);
+    opacity: 0.8;
+    flex: 0 0 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.pill-text h3 {
+    font-size: 3.1rem;
+    margin-bottom: 10px;
+    font-family: var(--font-display);
+    font-style: italic;
+}
+
+.pill-text p {
+    font-size: 1.25rem;
+    color: var(--text-main);
+    line-height: 1.8;
+    max-width: 700px;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 @media (max-width: 1100px) {
     .impact-hero-slick {
         flex-direction: column;
@@ -1119,158 +1254,180 @@ body {
     .giving-pill-cta { border-radius: 60px; padding: 40px; }
 }
 
-/* Horizontal Slick Row */
-.slick-row-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    width: 100%;
-    max-width: 1100px;
-    margin: 50px auto 0;
+@media (max-width: 1000px) {
+    .footer-liquid-container { flex-direction: column; }
+    .footer-column { width: 100%; }
+    .input-stack { grid-template-columns: 1fr; }
 }
 
-.slick-pill-row {
-    flex: 1; /* Ensures both rectangles are the same size */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 50px 40px;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 50px; /* "Rounded Rectangle" liquid look */
-    text-decoration: none;
-    color: white;
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-}
-
-.slick-pill-row.highlight {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
-}
-
-.slick-pill-row:hover {
-    transform: scale(1.03) translateY(-10px);
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
-}
-
-.pill-btn-content {
-    text-align: left;
-}
-
-.pill-btn-content .jazzy-title {
-    font-size: 2.2rem; /* Matches subpage headers */
-    margin-bottom: 8px;
-    display: block;
-}
-
-.pill-btn-content p {
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.7);
-    line-height: 1.4;
-    max-width: 250px;
-}
-
-.slick-pill-row i {
-    font-size: 1.8rem;
-    opacity: 0.2;
-    transition: 0.4s;
-}
-
-.slick-pill-row:hover i {
-    opacity: 1;
-    transform: translateX(15px);
-}
-
-/* Mobile: Stack them when screen gets too narrow */
-@media (max-width: 900px) {
-    .slick-row-container {
-        flex-direction: column;
-        padding: 0 20px;
+@media (max-width: 975px) {
+    .glass-nav {
+        padding: 10px 2%;
+        gap: 8px;
+        flex-wrap: nowrap;
+        flex-direction: row;
     }
-    .slick-pill-row {
+    .nav-links {
+        gap: 10px;
+        flex: 0 1 auto;
+        min-width: 0;
+    }
+    .nav-links a:not(.give-link) {
+        font-size: 0.6rem;
+        letter-spacing: 1px;
+    }
+    .give-link {
+        margin-left: 0;
+        padding: 6px 12px;
+        font-size: 0.6rem;
+        letter-spacing: 1px;
+    }
+    .nav-logo img { height: 44px; }
+    .nav-links.left { margin-right: 0; }
+    .nav-links.right { margin-left: 0; }
+}
+
+@media (min-width: 501px) and (max-width: 975px) {
+    .nav-links a:not(.give-link) {
+        font-size: 0.7rem;
+        letter-spacing: 1.2px;
+    }
+    .give-link {
+        padding: 7px 14px;
+        font-size: 0.7rem;
+    }
+    .nav-logo img { height: 48px; }
+}
+
+@media (max-width: 900px) {
+    .glass-nav { top: 10px; }
+    .jazzy-title { font-size: 3rem; }
+    .liquid-container { flex-direction: column; align-items: center; }
+    .slick-row-container { flex-direction: column; padding: 0 18px; }
+    .slick-pill-row { width: 100%; padding: 32px; border-radius: 26px; }
+    .pill-btn-content .jazzy-title { font-size: 2rem; }
+    .pill-btn-content p { font-size: 0.95rem; }
+    .giving-pill-cta { padding: 32px 28px; border-radius: 50px; }
+    .impact-flow-slick,
+    .beliefs-flow,
+    .leadership-flow {
+        padding: 0 18px;
+    }
+    .wide-glass-box {
         width: 100%;
+        max-width: 720px;
+        margin: 0 auto 32px;
+        padding: 40px 28px;
+    }
+    .map-container,
+    .map-glass {
+        max-width: 860px;
+        margin: 24px auto;
+        border-radius: 40px;
+    }
+    .google-map-iframe { border-radius: 28px; }
+    .slick-pill,
+    .slick-pill.reverse,
+    .belief-pill,
+    .belief-pill.reverse,
+    .leader-pill,
+    .leader-pill.reverse {
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 850px) {
+    .belief-pill,
+    .belief-pill.reverse {
+        flex-direction: column;
+        text-align: center;
+        border-radius: 50px;
+        padding: 40px 30px;
+        gap: 20px;
+    }
+    .belief-icon { flex: none; font-size: 3rem; }
+}
+
+@media (max-width: 800px) {
+    .leader-pill,
+    .leader-pill.reverse {
+        flex-direction: column;
+        border-radius: 50px;
+        text-align: center;
         padding: 40px;
     }
+    .leader-pill.reverse .leader-contact { justify-content: center; }
 }
 
-/* Overlapping Slick Pillars for Impact Page */
-.impact-flow-slick {
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
-    padding-bottom: 100px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.slick-pill {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    background: rgba(255, 255, 255, 0.03);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    padding: 60px 80px;
-    border-radius: 200px; /* Maximum liquid look */
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* These create the asymmetrical, jazzy flow */
-.slick-pill:not(.reverse) {
-    margin-right: 10%; /* Pushes toward the left */
-}
-
-.slick-pill.reverse {
-    flex-direction: row-reverse;
-    text-align: right;
-    margin-left: 10%; /* Pushes toward the right */
-    background: rgba(255, 255, 255, 0.02);
-}
-
-.slick-pill:hover {
-    transform: scale(1.02) translateY(-10px);
-    background: rgba(255, 255, 255, 0.08);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-}
-
-.pill-icon {
-    font-size: 4rem;
-    color: #ff4b2b; /* UMC Red Pop */
-    opacity: 0.8;
-    flex: 0 0 100px;
-    display: flex;
-    justify-content: center;
-}
-
-.pill-text h3 {
-    font-size: 2.8rem;
-    margin-bottom: 10px;
-    font-family: 'Fraunces', serif;
-    font-style: italic;
-}
-
-.pill-text p {
-    font-size: 1.15rem;
-    color: rgba(255,255,255,0.7);
-    line-height: 1.8;
-    max-width: 700px;
-}
-
-/* Mobile Smoothing for Impact Pills */
 @media (max-width: 900px) {
-    .slick-pill, .slick-pill.reverse { 
-        flex-direction: column; 
-        margin: 0 !important; 
-        padding: 40px; 
-        border-radius: 50px; 
+    .slick-pill,
+    .slick-pill.reverse {
+        flex-direction: column;
+        margin: 0 !important;
+        padding: 32px;
+        border-radius: 38px;
         text-align: center;
     }
+    .pill-text h3 { font-size: 2.4rem; }
+    .pill-text p { font-size: 1.05rem; }
     .pill-icon { flex: none; margin-bottom: 20px; }
+}
+
+@media (max-width: 480px) {
+    .glass-nav {
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 4px;
+        padding: 6px 2%;
+    }
+    .nav-links { display: contents; }
+    .nav-logo { flex: 0 0 auto; }
+    .nav-logo img { height: 36px; }
+    .nav-links a:not(.give-link) {
+        font-size: 0.58rem;
+        letter-spacing: 0.9px;
+    }
+    .give-link {
+        flex: 0 0 100%;
+        text-align: center;
+        margin: 4px auto 0;
+        padding: 5px 10px;
+        font-size: 0.58rem;
+        letter-spacing: 0.9px;
+    }
+
+    .beliefs-flow { padding: 0 12px; }
+    .wide-glass-box {
+        max-width: 100%;
+        margin: 0 auto 24px;
+        padding: 28px 20px;
+        border-radius: 40px;
+    }
+
+    .faq-accordion { padding: 0 12px; }
+    .glass-detail { border-radius: 28px; }
+    .glass-detail summary {
+        padding: 18px 22px;
+        font-size: 1.2rem;
+    }
+    .faq-content { padding: 0 22px 22px; }
+
+    .map-container,
+    .map-glass {
+        max-width: 100%;
+        margin: 16px auto;
+        border-radius: 30px;
+    }
+    .google-map-iframe { border-radius: 20px; }
+}
+
+@media (min-width: 1200px) {
+    .hero .jazzy-title { font-size: 5rem; }
+    .mission-statement p { font-size: 1.2rem; }
+    .schedule { font-size: 0.95rem; }
+    .slick-pill-row { border-radius: 30px; }
+    .pill-btn-content .jazzy-title { font-size: 2.4rem; }
+    .pill-btn-content p { font-size: 1.05rem; }
 }
