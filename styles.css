@@ -1,0 +1,1276 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --umc-red: #ff4b2b;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.15);
+    --text-main: #ffffff;
+    --accent-gold: #f39c12;
+    --text-dim: rgba(255, 255, 255, 0.7);
+    --liquid-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    --glass-blur: blur(22px);
+    --glass-highlight: rgba(255, 255, 255, 0.12);
+    --ease-slick: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body {
+    background: url('images/Worship.png') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #000;
+    min-height: 100vh;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    overflow-x: hidden;
+}
+
+.bg-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.8) 100%);
+    z-index: -1;
+}
+
+/* Symmetrical Fixed Navbar */
+.glass-nav {
+    position: fixed;
+    top: 0; /* Align to top for a full bar feel */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    z-index: 100;
+    width: 100%; /* Spans full width when glass is active */
+    padding: 20px 5%;
+    justify-content: space-between; 
+    
+    /* The Liquid Glass Background */
+    background: var(--glass-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
+    /* Smooth transitions for both movement and the glass effect */
+    transition: 
+        transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+        background 0.4s ease, 
+        backdrop-filter 0.4s ease, 
+        border-color 0.4s ease,
+        opacity 0.4s ease;
+}
+
+/* State: Transparent at the top of the page */
+.glass-nav.at-top {
+    background: var(--glass-bg);
+    backdrop-filter: blur(0px);
+    -webkit-backdrop-filter: blur(0px);
+    border-color: var(--glass-highlight);
+    padding-top: 30px; /* Give it a little breathing room when transparent */
+}
+
+.nav-hidden {
+    transform: translate(-50%, -150%); /* Slides it up and out of view */
+    opacity: 0;
+    pointer-events: none; /* Prevents clicking invisible links */
+}
+
+.nav-links {
+    flex: 1; 
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    text-shadow: 0 2px 10px var(--glass-bg);
+}
+
+.nav-links.left { justify-content: flex-end; margin-right: 40px; }
+.nav-links.right { justify-content: flex-start; margin-left: 40px; }
+
+.nav-logo {
+    /* Logo stays its natural size and doesn't shrink/grow */
+    flex: 0 0 auto; 
+    text-align: center;
+}
+
+.nav-logo img {
+    height: 65px;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.nav-logo img:hover {
+    transform: scale(1.05);
+}
+
+/* Jazzy Typography for Links */
+.nav-links a:not(.give-link) {
+    color: var(--text-main);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    transition: all 0.3s var(--ease-slick);
+}
+
+.nav-links a:not(.give-link):hover {
+    color: var(--umc-red); /* Sunset Red on hover */
+    text-shadow: 0 0 15px var(--umc-red-glow); /* Jazzy glow */
+}
+
+/* Refined Support Button */
+.give-link {
+    margin-left: auto; 
+    background: var(--umc-red) !important; /* Primary Red */
+    color: var(--text-main) !important;
+    border: 1px solid var(--umc-red);
+    padding: 10px 22px;
+    border-radius: 30px;
+    backdrop-filter: blur(10px);
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    transition: all 0.4s var(--ease-slick);
+}
+
+.give-link:hover {
+    background: var(--text-main) !important; /* Turns White */
+    color: var(--umc-red) !important; /* Text turns Red */
+    border-color: var(--text-main);
+    box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
+    transform: scale(1.05); /* Extra "slick" feedback */
+}
+
+.mission-statement a {
+    color: var(--text-main); /* Uses the #ffffff variable */
+    font-weight: 700;        /* Makes it bold */
+    text-decoration: underline; 
+    text-underline-offset: 4px; /* Adds breathing room under the text */
+    transition: all 0.3s ease;
+}
+
+.mission-statement a:hover {
+    color: var(--umc-red);
+    text-decoration-color: var(--umc-red);
+}
+
+/* Hero Typography */
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 100vh;
+    padding: 120px 20px 40px;
+}
+
+.jazzy-title {
+    font-family: 'Fraunces', serif;
+    font-size: 4.5rem;
+    font-weight: 600;
+    font-style: italic;
+    color: var(--accent-gold);
+    line-height: 1.1;
+    margin-bottom: 20px;
+    letter-spacing: -2px;
+}
+
+/* Fix: Ensures icons inside jazzy titles stay on the same line */
+.jazzy-title i.icon-large {
+    display: inline-block; /* Overrides display: block from styles.css */
+    margin-bottom: 0;      /* Removes the 20px bottom margin */
+    margin-right: 15px;    /* Adds breathing room between icon and text */
+    vertical-align: middle; /* Centers the icon vertically with the text */
+    font-size: 0.8em;      /* Scales slightly to match the font height */
+}
+
+.mission-statement {
+    max-width: 600px;
+    margin: 0 auto 30px;
+}
+
+.mission-statement p {
+    font-size: 1.1rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--text-main);
+}
+
+.schedule {
+    font-size: 0.85rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-main);
+    margin-bottom: 50px;
+}
+
+/* Refined Liquid Boxes */
+.liquid-container {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+}
+
+.liquid-box {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: inset 0 0 20px rgba(255,255,255,0.05);
+}
+
+.liquid-box:hover {
+    transform: scale(1.1) translateY(-10px);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.4);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.liquid-box.highlight {
+    background: rgba(255, 255, 255, 0.08); /* Slightly brighter but not pushy */
+}
+
+/* Watermark */
+.watermark {
+    position: fixed;
+    bottom: 5%;
+    right: 8%;
+    height: 250px;
+    opacity: 0.3;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Subpage specific spacing */
+.subpage .content-wrapper {
+    padding-top: 150px;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
+.beliefs-hero {
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+/* Beliefs Flow - The "Jazzy" Staggered Layout */
+.beliefs-flow {
+    max-width: 950px;
+    margin: 0 auto 100px;
+}
+
+.belief-pill {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    margin-bottom: 40px;
+    padding: 50px 60px;
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 120px; /* The liquid drop/pill shape */
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.belief-pill.reverse {
+    flex-direction: row-reverse;
+    text-align: right;
+    background: rgba(255, 255, 255, 0.02); /* Slight variation */
+}
+
+.belief-pill:hover {
+    transform: scale(1.02) translateY(-5px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.belief-icon {
+    font-size: 3.5rem;
+    color: #8470FF; /* UMC Red Pop */
+    flex: 0 0 120px;
+    display: flex;
+    justify-content: center;
+    filter: drop-shadow(0 0 15px rgba(255,75,43,0.3));
+}
+
+.belief-text h3 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 2.4rem;
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+    color: var(--accent-gold);
+}
+
+.belief-text p {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+/* Mobile Smoothing */
+@media (max-width: 850px) {
+    .belief-pill, .belief-pill.reverse {
+        flex-direction: column;
+        text-align: center;
+        border-radius: 50px;
+        padding: 40px 30px;
+        gap: 20px;
+    }
+    .belief-icon {
+        flex: none;
+        font-size: 3rem;
+    }
+}
+
+/* Specific styling for Heritage/Inclusion sections */
+.wide-glass-box {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 60px;
+    padding: 60px 40px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.wide-glass-box.highlight {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+}
+
+.icon-large {
+    font-size: 3rem;
+    color: #ff4b2b; /* A jazzy pop of color */
+    margin-bottom: 20px;
+    display: block;
+}
+
+.heritage-content p {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Newsletter Refinement */
+.newsletter-glass {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    padding: 40px;
+    margin-top: 60px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .glass-nav { flex-direction: column; gap: 15px; top: 10px; }
+    .jazzy-title { font-size: 3rem; }
+    .liquid-container { flex-direction: column; align-items: center; }
+}
+
+/* Glass Footer Styles */
+.glass-footer {
+    padding: 90px 5% 50px;
+    position: relative;
+    z-index: 10;
+}
+
+.footer-liquid-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 30px;
+    align-items: stretch; /* Ensures all glass panes are the same height */
+}
+
+.footer-column {
+    flex: 1;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    padding: 40px;
+    text-align: left;
+    color: var(--text-main);
+    box-shadow: var(--liquid-shadow);
+    transition: transform 0.4s var(--ease-slick), background 0.4s ease, border-color 0.4s ease;
+}
+
+.footer-column:hover {
+    transform: translateY(-10px);
+    background: var(--glass-highlight);
+}
+
+/* Typography Inside Footer */
+.footer-column h3.jazzy-title {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+}
+
+/* Column 1: Contact Details */
+.contact-details p, .contact-details a {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.8;
+    margin-bottom: 15px;
+    display: block;
+    text-decoration: none;
+}
+
+.footer-socials {
+    margin-top: 18px;
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.footer-socials a {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.footer-socials i {
+    font-size: 1.1rem;
+    color: var(--text-dim);
+    transition: 0.3s;
+}
+
+.footer-socials a:hover {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.45);
+    transform: translateY(-2px);
+}
+
+.footer-socials a:hover i {
+    color: var(--umc-red);
+}
+
+/* Column 2: Mailing Form Fixes */
+.mailto-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.3s;
+}
+
+.mailto-link:hover {
+    color: #ff4b2b;
+    transform: translateX(5px);
+}
+
+/* The Liquid Glass Form Container */
+.contact-glass {
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 40px;
+    border-radius: 60px; /* High radius for that liquid feel */
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.input-stack {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.glass-footer input,
+.glass-footer textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 12px 16px;
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    outline: none;
+    transition: 0.3s;
+}
+
+.glass-footer input:focus,
+.glass-footer textarea:focus {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.glass-footer input::placeholder,
+.glass-footer textarea::placeholder {
+    color: rgba(255, 255, 255, 0.55);
+}
+
+.submit-btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 15px;
+    border-radius: 30px;
+    border: none;
+    background: white;
+    color: black;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.submit-btn:hover {
+    background: #ff4b2b;
+    color: white;
+    transform: scale(1.02);
+}
+.submit-btn-slick {
+    margin-top: 10px;
+    width: 100%;
+    padding: 9px 14px;
+    border-radius: 30px;
+    border: none;
+    background: white;
+    color: black;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.4s;
+    font-size: 0.8rem;
+}
+
+.submit-btn-slick:hover {
+    background: var(--umc-red);
+    color: white;
+}
+
+/* Column 3: Partner Section */
+.partner-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    text-decoration: none;
+    color: var(--text-dim);
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.partner-link img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    opacity: 0.9;
+    transition: 0.4s;
+}
+
+.partner-link:hover img {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+/* Bottom Copyright */
+.footer-bottom-slick {
+    margin-top: 60px;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.3);
+    letter-spacing: 2px;
+}
+
+/* Mobile Smoothing */
+@media (max-width: 1000px) {
+    .footer-liquid-container {
+        flex-direction: column;
+    }
+    .footer-column {
+        width: 100%;
+    }
+    .input-stack {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Leadership Specifics */
+.leadership-flow {
+    max-width: 900px;
+    margin: 0 auto 100px;
+}
+
+.leader-pill {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 40px;
+    padding: 60px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    transition: all 0.5s ease;
+}
+
+.leader-pill.reverse {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+
+.leader-pill:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-5px);
+}
+
+.leader-info h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 2.2rem;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
+.leader-info h3 small {
+    font-size: 1rem;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    opacity: 0.6;
+}
+
+.role {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #ff4b2b; /* UMC Red Accent */
+    margin-bottom: 20px;
+}
+
+.leader-info p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 25px;
+}
+
+.leader-contact {
+    display: flex;
+    gap: 20px;
+}
+
+.leader-pill.reverse .leader-contact {
+    justify-content: flex-end;
+}
+
+.leader-contact a {
+    color: white;
+    font-size: 1.3rem;
+    opacity: 0.7;
+    transition: 0.3s;
+}
+
+.leader-contact a:hover {
+    opacity: 1;
+    color: #ff4b2b;
+    transform: scale(1.2);
+}
+
+/* Mobile Smoothing */
+@media (max-width: 800px) {
+    .leader-pill, .leader-pill.reverse {
+        flex-direction: column;
+        border-radius: 50px;
+        text-align: center;
+        padding: 40px;
+    }
+    .leader-pill.reverse .leader-contact { justify-content: center; }
+}
+
+/* FAQ Accordion Styling */
+.faq-accordion {
+    max-width: 800px;
+    margin: 0 auto 100px;
+}
+
+.glass-detail {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.glass-detail summary {
+    padding: 25px 40px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.glass-detail summary i {
+    font-size: 1rem;
+    transition: 0.4s;
+}
+
+.glass-detail[open] summary i {
+    transform: rotate(180deg);
+}
+
+.faq-content {
+    padding: 0 40px 30px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Find Us Section */
+.find-us {
+    text-align: center;
+    padding-bottom: 100px;
+}
+
+.map-container {
+    max-width: 1000px;
+    margin: 20px auto;
+    border-radius: 60px; /* Large liquid corners */
+    overflow: hidden;
+    position: relative;
+}
+
+.map-container iframe {
+    filter: grayscale(0.5) contrast(1.2); /* Makes map match the jazzy vibe */
+}
+
+/* Mirroring the Calendar format for the Map */
+.map-glass {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 60px;
+    
+    /* THE FLOATING EFFECT: 30px padding around the map and info */
+    padding: 30px; 
+    
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space between the map and the address info */
+}
+
+.google-map-iframe {
+    width: 100%;
+    border-radius: 35px; /* Matching the calendar's inner corners */
+    border: none;
+    
+    /* Jazzy Filter: Matches the calendar's dark-mode look */
+    filter: invert(90%) hue-rotate(180deg) brightness(1.1) contrast(0.9);
+    opacity: 0.85;
+    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.google-map-iframe:hover {
+    opacity: 1;
+    filter: invert(90%) hue-rotate(180deg) brightness(1.2);
+    transform: scale(1.01);
+}
+
+/* Adjusting map-info to fit inside the new glass padding */
+.map-info {
+    padding: 10px 0 0; /* Reduced padding since container handles it */
+    background: transparent; /* Remove old background to let the glass show through */
+    backdrop-filter: none;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--umc-red)
+}
+
+/* Connect Hero Styling */
+.connect-hero {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.scripture-quote {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 800px;
+    margin: 20px auto;
+    line-height: 1.6;
+}
+
+/* Connect Grid */
+.connect-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px 0 80px;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 40px;
+    padding: 40px;
+    text-align: center;
+    transition: 0.4s ease;
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-10px);
+}
+
+.glass-card h3 {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-size: 1.8rem;
+    margin: 20px 0 15px;
+}
+
+.text-link {
+    color: #ff4b2b;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: block;
+    margin-top: 20px;
+}
+
+/* Special Events Section */
+.special-events {
+    text-align: center;
+    padding: 60px 0;
+}
+
+.social-links-large {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.social-links-large i {
+    font-size: 2.5rem;
+    color: white;
+    opacity: 0.6;
+    transition: 0.3s;
+}
+
+.social-links-large i:hover {
+    opacity: 1;
+    color: #ff4b2b;
+    transform: scale(1.1);
+}
+
+/* Image Carousel Container */
+.image-carousel {
+    width: 100%;
+    overflow: hidden;
+    padding: 60px 0;
+    position: relative;
+    /* Optional: Fades on the edges to make it feel more "liquid" */
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.carousel-track {
+    display: flex;
+    /* 14 slides total (7 unique * 2) at 350px each */
+    width: calc(350px * 14); 
+    animation: scroll 35s linear infinite; /* Slightly faster for 7 images */
+}
+
+.slide {
+    width: 350px;
+    height: 250px;
+    padding: 0 15px; /* Adds space between the "bubbles" */
+    flex-shrink: 0;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* This is the secret for different frame sizes */
+    border-radius: 40px; /* Liquid rounded corners */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    transition: transform 0.5s ease;
+}
+
+/* Subtle hover effect for individual community moments */
+.slide img:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* We move the track exactly the width of the first 8 images (-2800px) */
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        /* Move exactly 7 images to the left, then snap back */
+        transform: translateX(calc(-350px * 7)); 
+    }
+}
+
+/* Calendar Styling */
+.calendar-section {
+    text-align: center;
+    margin-top: 80px;
+}
+
+.calendar-glass {
+    max-width: 1000px;
+    margin: 40px auto;
+    height: 700px; /* Increased slightly to account for padding */
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 60px;
+    
+    /* THE FIX: Added padding for the floating effect */
+    padding: 30px; 
+    
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.google-calendar-iframe {
+    width: 100%;
+    height: 100%;
+    
+    /* Added border-radius so the inner corners are also "liquid" */
+    border-radius: 35px; 
+    border: none;
+    
+    /* Jazzy filter for dark mode */
+    filter: invert(90%) hue-rotate(180deg) brightness(1.1) contrast(0.9);
+    opacity: 0.85;
+    transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.google-calendar-iframe:hover {
+    opacity: 1;
+    filter: invert(90%) hue-rotate(180deg) brightness(1.2);
+    /* Subtle lift effect on hover */
+    transform: scale(1.01); 
+}
+
+/* Slick Impact Layout - Pill Hero */
+.impact-hero-slick {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    padding: 100px 0;
+    margin-bottom: 80px;
+}
+
+.impact-text-main {
+    flex: 1.2;
+    text-align: left;
+}
+
+.impact-text-main h1 {
+    font-size: 6.5rem; /* Massive for visual weight */
+    line-height: 0.85;
+    margin-bottom: 30px;
+}
+
+.impact-text-main p {
+    font-size: 1.25rem;
+    max-width: 550px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.8;
+}
+
+/* The New Giving Pill CTA */
+.giving-pill-container {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.giving-pill-cta {
+    width: 100%;
+    max-width: 500px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 150px; /* Matching the liquid pill language */
+    padding: 60px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    color: white;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+}
+
+.giving-pill-cta:hover {
+    transform: scale(1.03) translateX(-10px);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+}
+
+.pill-content {
+    text-align: left;
+}
+
+.pill-content .jazzy-title {
+    font-size: 2.8rem;
+    line-height: 1.1;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+}
+
+.pill-content p {
+    font-size: 0.85rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+}
+
+.giving-pill-cta i {
+    font-size: 2.5rem;
+    opacity: 0.3;
+    transition: 0.4s ease;
+}
+
+.giving-pill-cta:hover i {
+    opacity: 1;
+    transform: translateX(15px);
+}
+
+/* Mobile Smoothing */
+@media (max-width: 1100px) {
+    .impact-hero-slick {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 20px;
+    }
+    .impact-text-main { text-align: center; }
+    .impact-text-main h1 { font-size: 4.5rem; }
+    .giving-pill-container { width: 100%; justify-content: center; }
+    .giving-pill-cta { border-radius: 60px; padding: 40px; }
+}
+
+/* Horizontal Slick Row */
+.slick-row-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    width: 100%;
+    max-width: 1100px;
+    margin: 50px auto 0;
+}
+
+.slick-pill-row {
+    flex: 1; /* Ensures both rectangles are the same size */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 40px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px; /* "Rounded Rectangle" liquid look */
+    text-decoration: none;
+    color: white;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+}
+
+.slick-pill-row.highlight {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.slick-pill-row:hover {
+    transform: scale(1.03) translateY(-10px);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+}
+
+.pill-btn-content {
+    text-align: left;
+}
+
+.pill-btn-content .jazzy-title {
+    font-size: 2.2rem; /* Matches subpage headers */
+    margin-bottom: 8px;
+    display: block;
+}
+
+.pill-btn-content p {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.4;
+    max-width: 250px;
+}
+
+.slick-pill-row i {
+    font-size: 1.8rem;
+    opacity: 0.2;
+    transition: 0.4s;
+}
+
+.slick-pill-row:hover i {
+    opacity: 1;
+    transform: translateX(15px);
+}
+
+/* Mobile: Stack them when screen gets too narrow */
+@media (max-width: 900px) {
+    .slick-row-container {
+        flex-direction: column;
+        padding: 0 20px;
+    }
+    .slick-pill-row {
+        width: 100%;
+        padding: 40px;
+    }
+}
+
+/* Overlapping Slick Pillars for Impact Page */
+.impact-flow-slick {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding-bottom: 100px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.slick-pill {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 60px 80px;
+    border-radius: 200px; /* Maximum liquid look */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* These create the asymmetrical, jazzy flow */
+.slick-pill:not(.reverse) {
+    margin-right: 10%; /* Pushes toward the left */
+}
+
+.slick-pill.reverse {
+    flex-direction: row-reverse;
+    text-align: right;
+    margin-left: 10%; /* Pushes toward the right */
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.slick-pill:hover {
+    transform: scale(1.02) translateY(-10px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+}
+
+.pill-icon {
+    font-size: 4rem;
+    color: #ff4b2b; /* UMC Red Pop */
+    opacity: 0.8;
+    flex: 0 0 100px;
+    display: flex;
+    justify-content: center;
+}
+
+.pill-text h3 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+}
+
+.pill-text p {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.8;
+    max-width: 700px;
+}
+
+/* Mobile Smoothing for Impact Pills */
+@media (max-width: 900px) {
+    .slick-pill, .slick-pill.reverse { 
+        flex-direction: column; 
+        margin: 0 !important; 
+        padding: 40px; 
+        border-radius: 50px; 
+        text-align: center;
+    }
+    .pill-icon { flex: none; margin-bottom: 20px; }
+}
