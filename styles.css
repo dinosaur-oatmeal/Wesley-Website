@@ -329,6 +329,27 @@ body {
     margin-bottom: 80px;
 }
 
+.alumni-hero .intro-text {
+    max-width: 720px;
+    margin: 0 auto 20px;
+}
+
+.alumni-cta {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.alumni-cta .submit-btn-slick {
+    width: auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 18px;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+}
+
 /* =========================================================
    BELIEFS
    ========================================================= */
@@ -777,6 +798,79 @@ body {
     opacity: 1;
     color: var(--umc-red);
     transform: scale(1.2);
+}
+
+/* =========================================================
+   ALUMNI
+   ========================================================= */
+.alumni-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 30px;
+    margin: 0 auto 30px;
+}
+
+.alumni-card {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border-subtle);
+    border-radius: 40px;
+    padding: 28px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: var(--transition-base);
+    box-shadow: var(--shadow-glass);
+}
+
+.alumni-card:hover {
+    transform: translateY(-8px);
+    background: var(--glass-highlight);
+    border-color: var(--glass-border-strong);
+}
+
+.alumni-photo {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.35);
+}
+
+.alumni-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.alumni-text h3 {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 1.6rem;
+    margin-bottom: 6px;
+}
+
+.alumni-text p {
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: var(--text-main);
+}
+
+.alumni-text p.alumni-now {
+  color: var(--accent-gold);
+}
+
+.alumni-now {
+  margin-top: 8px;
+  color: var(--accent-gold);
+}
+
+.alumni-now p {
+  color: var(--accent-gold);
 }
 
 /* =========================================================
@@ -1347,6 +1441,7 @@ body {
     /* 5. Footer & Forms */
     .footer-column { width: 100%; }
     .input-stack { grid-template-columns: 1fr; }
+    .alumni-grid { grid-template-columns: 1fr; }
 
     /* 6. Map & Accordion */
     .map-container, .map-glass, .google-map-iframe {
