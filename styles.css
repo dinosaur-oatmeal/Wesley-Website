@@ -810,6 +810,17 @@ body {
     margin: 0 auto 30px;
 }
 
+.alumni-grid.single-alumni {
+    grid-template-columns: minmax(0, 760px);
+    justify-content: center;
+}
+
+.alumni-grid.single-alumni .alumni-photo {
+    max-width: 430px;
+    margin: 0 auto;
+    aspect-ratio: 3 / 2;
+}
+
 .alumni-card {
     background: var(--glass-bg);
     backdrop-filter: var(--glass-blur);
@@ -871,6 +882,16 @@ body {
 
 .alumni-now p {
   color: var(--accent-gold);
+}
+
+.alumni-coming-soon {
+    max-width: 760px;
+    margin: 0 auto 40px;
+    text-align: center;
+    font-size: 1rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
 }
 
 /* =========================================================
