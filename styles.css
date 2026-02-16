@@ -9,9 +9,9 @@
 
 :root {
     /* Brand */
-    --umc-red: #e4002b;
-    --umc-red-glow: #af292e;
-    --accent-gold: #f39c12;
+    --uta-blue: #0289f0;
+    --uta-blue-glow: #0064b1;
+    --uta-orange: #f39c12;
 
     /* Type */
     --font-body: 'Oswald', sans-serif;
@@ -157,15 +157,15 @@ body {
 }
 
 .nav-links a:not(.give-link):hover {
-    color: var(--umc-red);
-    text-shadow: 0 0 15px var(--umc-red-glow);
+    color: var(--uta-blue);
+    text-shadow: 0 0 15px var(--uta-blue-glow);
 }
 
 .give-link {
     margin-left: auto;
-    background: var(--umc-red) !important;
+    background: var(--uta-blue) !important;
     color: var(--text-main) !important;
-    border: 1px solid var(--umc-red);
+    border: 1px solid var(--uta-blue);
     padding: 10px 22px;
     border-radius: 30px;
     backdrop-filter: blur(10px);
@@ -179,7 +179,7 @@ body {
 
 .give-link:hover {
     background: var(--text-main) !important;
-    color: var(--umc-red) !important;
+    color: var(--uta-blue) !important;
     border-color: var(--text-main);
     box-shadow: 0 10px 25px rgba(255, 255, 255, 0.2);
     transform: scale(1.05);
@@ -208,7 +208,7 @@ body {
     font-size: 4.5rem;
     font-weight: 600;
     font-style: italic;
-    color: var(--accent-gold);
+    color: var(--uta-orange);
     line-height: 1.1;
     margin-bottom: 20px;
     letter-spacing: -2px;
@@ -245,8 +245,8 @@ body {
 
 .mission-statement a:hover,
 .faq-content a:hover {
-    color: var(--umc-red);
-    text-decoration-color: var(--umc-red);
+    color: var(--uta-blue);
+    text-decoration-color: var(--uta-blue);
 }
 
 .schedule {
@@ -270,7 +270,7 @@ body {
     width: 220px;
     height: 220px;
     border-radius: 50%;
-    background: var(--umc-red);
+    background: var(--uta-blue);
     color: var(--text-main);
     backdrop-filter: var(--glass-blur-weak);
     -webkit-backdrop-filter: var(--glass-blur-weak);
@@ -294,7 +294,7 @@ body {
     border-color: var(--glass-highlight);
     box-shadow: var(--shadow-glass);
     background: var(--text-main);
-    color: var(--umc-red);
+    color: var(--uta-blue);
 }
 
 .liquid-box.highlight {
@@ -387,7 +387,7 @@ body {
 
 .belief-icon {
     font-size: 3.5rem;
-    color: var(--umc-red);
+    color: var(--uta-blue);
     flex: 0 0 120px;
     display: flex;
     justify-content: center;
@@ -400,7 +400,7 @@ body {
     font-size: 2.4rem;
     margin-bottom: 12px;
     letter-spacing: -1px;
-    color: var(--accent-gold);
+    color: var(--uta-orange);
 }
 
 .belief-text p {
@@ -431,7 +431,7 @@ body {
 
 .icon-large {
     font-size: 3rem;
-    color: var(--umc-red);
+    color: var(--uta-blue);
     margin-bottom: 20px;
     display: block;
 }
@@ -507,7 +507,7 @@ body {
 }
 
 .contact-details i {
-    color: var(--umc-red);
+    color: var(--uta-blue);
 }
 
 .footer-socials {
@@ -542,7 +542,7 @@ body {
 }
 
 .footer-socials a:hover i {
-    color: var(--umc-red);
+    color: var(--uta-blue);
 }
 
 .mailto-link {
@@ -557,7 +557,7 @@ body {
 }
 
 .mailto-link:hover {
-    color: var(--umc-red);
+    color: var(--uta-blue);
     transform: translateX(5px);
 }
 
@@ -631,7 +631,7 @@ body {
     padding: 9px 14px;
     border-radius: 30px;
     border: none;
-    background: var(--umc-red);
+    background: var(--uta-blue);
     color: var(--text-main);
     font-weight: 700;
     text-transform: uppercase;
@@ -643,7 +643,7 @@ body {
 
 .submit-btn-slick:hover {
     background: var(--text-main);
-    color: var(--umc-red);
+    color: var(--uta-blue);
 }
 
 .partner-link {
@@ -767,7 +767,7 @@ body {
     letter-spacing: 3px;
     font-size: 0.8rem;
     font-weight: 700;
-    color: var(--umc-red);
+    color: var(--uta-orange);
     margin-bottom: 20px;
 }
 
@@ -796,7 +796,7 @@ body {
 
 .leader-contact a:hover {
     opacity: 1;
-    color: var(--umc-red);
+    color: var(--uta-blue);
     transform: scale(1.2);
 }
 
@@ -872,16 +872,16 @@ body {
 }
 
 .alumni-text p.alumni-now {
-  color: var(--accent-gold);
+  color: var(--uta-orange);
 }
 
 .alumni-now {
   margin-top: 8px;
-  color: var(--accent-gold);
+  color: var(--uta-orange);
 }
 
 .alumni-now p {
-  color: var(--accent-gold);
+  color: var(--uta-orange);
 }
 
 .alumni-coming-soon {
@@ -999,7 +999,7 @@ body {
     gap: 40px;
     font-weight: 700;
     letter-spacing: 1px;
-    color: var(--umc-red);
+    color: white;
 }
 
 /* =========================================================
@@ -1048,15 +1048,15 @@ body {
     font-style: italic;
     font-size: 1.8rem;
     margin: 20px 0 15px;
-    color: var(--accent-gold)
+    color: var(--uta-orange)
 }
 
 .glass-card .icon {
-    color: var(--umc-red);
+    color: var(--uta-blue);
 }
 
 .text-link {
-    color: var(--umc-red);
+    color: var(--uta-blue);
     text-decoration: none;
     font-weight: 700;
     font-size: 0.9rem;
@@ -1088,7 +1088,7 @@ body {
 
 .social-links-large i:hover {
     opacity: 1;
-    color: var(--umc-red);
+    color: var(--uta-blue);
     transform: scale(1.1);
 }
 
@@ -1375,7 +1375,7 @@ body {
 
 .pill-icon {
     font-size: 4rem;
-    color: var(--umc-red);
+    color: var(--uta-blue);
     opacity: 0.8;
     flex: 0 0 100px;
     display: flex;
