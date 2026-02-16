@@ -1109,8 +1109,8 @@ body {
 
 .carousel-track {
     display: flex;
-    width: calc(350px * 14);
-    animation: scroll 35s linear infinite;
+    width: calc(350px * 22);
+    animation: scroll 60s linear infinite;
 }
 
 .slide {
@@ -1137,7 +1137,7 @@ body {
 
 @keyframes scroll {
     0% { transform: translateX(0); }
-    100% { transform: translateX(calc(-350px * 7)); }
+    100% { transform: translateX(calc(-350px * 11)); }
 }
 
 /* =========================================================
