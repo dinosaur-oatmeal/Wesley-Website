@@ -1,6 +1,7 @@
-let lastScrollTop = 0;
 const navbar = document.querySelector('.glass-nav');
+let lastScrollTop = 0;
 
+// Navbar scroll logic
 window.addEventListener('scroll', function() {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
     
