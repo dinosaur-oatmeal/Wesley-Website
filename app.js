@@ -1,6 +1,8 @@
 const navbar = document.querySelector('.glass-nav');
 let lastScrollTop = 0;
 
+console.log("Website Built by Will Maberry | B.S. Computer Science Fall 2022 - Spring 2026");
+
 // Navbar scroll logic
 window.addEventListener('scroll', function() {
     let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
