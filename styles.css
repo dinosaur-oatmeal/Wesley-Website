@@ -818,6 +818,13 @@ body {
     justify-content: center;
 }
 
+/* ONLY USE ONCE I HAVE 4 */
+/* .alumni-grid.single-alumni {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-content: center;
+    max-width: 1120px;
+} */
+
 .alumni-grid.single-alumni .alumni-photo {
     max-width: 430px;
     margin: 0 auto;
@@ -1465,7 +1472,10 @@ body {
     /* 5. Footer & Forms */
     .footer-column { width: 100%; }
     .input-stack { grid-template-columns: 1fr; }
-    .alumni-grid { grid-template-columns: 1fr; }
+    .alumni-grid,
+    .alumni-grid.single-alumni {
+        grid-template-columns: 1fr;
+    }
 
     /* 6. Map & Accordion */
     .map-container, .map-glass, .google-map-iframe {
